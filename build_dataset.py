@@ -102,7 +102,7 @@ for (imagePath, x, y, z, label) in zip(imagePaths, x_coordinates, y_coordinates,
 
 	# describe the image using multiple image descriptors	
 	for desc in featureDesc:
-		features= np.append(features, desc.describe(image))
+		features= np.append(features, desc.describe(crop))
 	
 	ls.append(label)
 	
