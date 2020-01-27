@@ -86,18 +86,15 @@ ls=[]
 for (imagePath, x, y, z, label) in zip(imagePaths, x_coordinates, y_coordinates, z_coordinates, labels):
 	x = int(x)
 	y = int(y)
+	height, width = image.shape
 	
 	image = cv2.imread(path.sep.join([config.BASE_PATH, imagePath]))
 	image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-	height, width = image.shape
 	mask = np.zeros((height,width), np.uint8)
 	circle_img = cv2.circle(mask, (x, y), config.NODULE_RADIUS_IN_PIXEL, (255,255,255), thickness=-1)
 	masked_data = cv2.bitwise_and(image, image, mask = circle_img)
 	crop = masked_data[y - config.NODULE_RADIUS_IN_PIXEL : y + config.NODULE_RADIUS_IN_PIXEL,
 	x - config.NODULE_RADIUS_IN_PIXEL : x + config.NODULE_RADIUS_IN_PIXEL]
-	
-	#cv2.imshow(imagePath,crop)
-	#cv2.waitKey(0)
 
 	# describe the image using multiple image descriptors	
 	for desc in featureDesc:
@@ -107,7 +104,6 @@ for (imagePath, x, y, z, label) in zip(imagePaths, x_coordinates, y_coordinates,
 	
 
 features = np.reshape(features, (imagePaths.shape[0], -1))
-print(features)
 dataset.add(features, ls)
 
 dataset.close()
