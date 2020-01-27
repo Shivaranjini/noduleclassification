@@ -15,9 +15,11 @@ config/nodule_config.py -> stores all the configuration parameters where in user
 **Modules**
 
 modules folder stores the internal modules of the project
+
 __Descriptors__
 
 modules/descriptors package holdes all the image descriptors 
+
 __IO__
 
 modules/io package holdes classes responsible for IO operation on HDF5 files 
