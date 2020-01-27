@@ -7,10 +7,10 @@ Follow the below steps to execute the program:
 
 **Folder Structure**
 
-noduleclassification --
-                    | --  config
-                    | --  data
-                    | --  modules
+noduleclassification ->
+                    | -> config
+                    | ->  data
+                    | ->  modules
                                  | --   	descriptors
                                  | --   	IO                    
                     | --  build_dataset.py
