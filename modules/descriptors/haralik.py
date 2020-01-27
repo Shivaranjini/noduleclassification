@@ -9,7 +9,7 @@ class Haralik:
 		self.ignore_zeros = ignore_zeros	
 
 	def describe(self, image):		
-		haralik  = mahotas.features.haralick(image, self.ignore_zeros).mean(axis=0)		
+		haralik  = mahotas.features.haralick(image, ignore_zeros = self.ignore_zeros).mean(axis=0)		
 		return haralik
 
 	def getFeatureVectorSize(self):
