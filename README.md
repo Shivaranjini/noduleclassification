@@ -6,16 +6,20 @@ Follow the below steps to execute the program:
 2. python train_model.py --> train the model with required ML classifier, using features extracted in the first step. This also saves model on disk.
 
 **Configuration**
+
 config/nodule_config.py -> stores all the configuration parameters where in user can specify:
 - Selection of multiple Image Descriptors (stacked in order to extract the features from input image)
 - Nodule size
 - Selection of ML Classifier to classify nodules
 
 **Modules**
+
 modules folder stores the internal modules of the project
 __Descriptors__
+
 modules/descriptors package holdes all the image descriptors 
 __IO__
+
 modules/io package holdes classes responsible for IO operation on HDF5 files 
 
 
