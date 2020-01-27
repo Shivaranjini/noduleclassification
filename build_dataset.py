@@ -5,7 +5,6 @@
 # import the necessary packages
 from __future__ import print_function
 from sklearn.preprocessing import LabelEncoder
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.utils import shuffle
 
