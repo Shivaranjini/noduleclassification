@@ -1,5 +1,5 @@
 # noduleclassification
-###Program to classify lungs nodules
+### Program to classify lungs nodules
 
 Follow the below steps to execute the program:
 1. python build_dataset.py --> to extract feature descriptors from the input images and store them in HDF5 on disk. 
