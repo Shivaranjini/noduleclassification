@@ -29,8 +29,13 @@ modules/io package holdes classes responsible for IO operation on HDF5 files
 
 
 __Segmentation__
+
 After programatic segmentation the following nodules are cropped from the input images:
+
 ![GitHub Logo](/images/cropped1.jpg)
+
 ![GitHub Logo](/images/cropped2.jpg)
+
 ![GitHub Logo](/images/cropped3.jpg)
+
 ![GitHub Logo](/images/cropped4.jpg)
