@@ -28,3 +28,6 @@ __IO__
 modules/io package holdes classes responsible for IO operation on HDF5 files 
 
 
+__Segmentation__
+After programatic segmentation the following nodules are cropped from the input images:
+![Alt text](images/crop1.jpg?raw=true "Nodules")
