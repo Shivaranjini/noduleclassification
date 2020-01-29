@@ -1,6 +1,6 @@
 #Author: Shivaranjini
 # USAGE
-# python build.py 
+# python build_dataset.py 
 
 # import the necessary packages
 from __future__ import print_function
