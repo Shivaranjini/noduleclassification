@@ -35,7 +35,7 @@ dataFrame = pd.read_csv(config.RAW_IMAGE_PATH, sep=r'\s*,\s*',delimiter=';',
 dataFrame = shuffle(dataFrame)
 
 #A cropped image with the specified demension (using radius param)is created and connected
-#components are analized. If the connected component is sufficiently large then the 
+#components are analized. If the connected component is sufficiently large, then the 
 #radius of minimum enclosing circle is returned.
 def process_in_parts(image, radius, x, y):
 	background = 0
@@ -92,9 +92,9 @@ def process_image(imagePath, x, y):
 	#eroded = cv2.erode(mid.copy(), None, iterations=1)
 	dilated = cv2.dilate(mid.copy(), None, iterations=2)
 	
-	# Nodule is analyzed at various window dimension with respect to the center.
+	# Nodule is analyzed at various window dimension with respect to the center, starting from 3.
 	# Whenever the connected component at the given window 'k' is comparitively small
-	#with respect to the size of the window (using extent value), then processing will be stopped and previous 
+	# with respect to the size of the window (using extent value), then processing will be stopped and previous 
 	# min enclosing circle's radius is considered and region is segmented
 	k = 3
 	radius = 0
@@ -106,18 +106,18 @@ def process_image(imagePath, x, y):
 			break
 		k = k + 1	
 	
-	if(radius > 0):
-		radius = int(radius)
-		mask = np.zeros((height,width), np.uint8)
-		circle_img = cv2.circle(mask, (x, y),radius, (255,255,255), thickness=-1)
-		masked_data = cv2.bitwise_and(image, image, mask = circle_img)
-		crop = masked_data[y - radius: y + radius,
-		x - radius : x + radius]		
-		
-	else:
+	if(radius == 0):
 		print("segmentation coudn't succeed, hence falling back to circular region extraction with predefined radius ")
-		crop = image[y - config.NODULE_RADIUS_IN_PIXEL : y + config.NODULE_RADIUS_IN_PIXEL,
-			x - config.NODULE_RADIUS_IN_PIXEL : x + config.NODULE_RADIUS_IN_PIXEL]		
+		radius = config.NODULE_RADIUS_IN_PIXEL
+
+	
+	radius = int(radius)
+	mask = np.zeros((height,width), np.uint8)
+	circle_img = cv2.circle(mask, (x, y),radius, (255,255,255), thickness=-1)
+	masked_data = cv2.bitwise_and(image, image, mask = circle_img)
+	crop = masked_data[y - radius: y + radius, x - radius : x + radius]		
+		
+		
 		
 	return crop	
 
