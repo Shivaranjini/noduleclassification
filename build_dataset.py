@@ -92,9 +92,9 @@ def process_image(imagePath, x, y):
 	#eroded = cv2.erode(mid.copy(), None, iterations=1)
 	dilated = cv2.dilate(mid.copy(), None, iterations=2)
 	
-	# Nodule is analyzed at various window dimension with respect to the center
+	# Nodule is analyzed at various window dimension with respect to the center.
 	# Whenever the connected component at the given window 'k' is comparitively small
-	#with respect to the size of the window, then processing will be stopped and previous 
+	#with respect to the size of the window (using extent value), then processing will be stopped and previous 
 	# min enclosing circle's radius is considered and region is segmented
 	k = 3
 	radius = 0
@@ -113,8 +113,13 @@ def process_image(imagePath, x, y):
 		masked_data = cv2.bitwise_and(image, image, mask = circle_img)
 		crop = masked_data[y - radius: y + radius,
 		x - radius : x + radius]		
-		return crop
-	return None	
+		
+	else:
+		print("segmentation coudn't succeed, hence falling back to circular region extraction with predefined radius ")
+		crop = image[y - config.NODULE_RADIUS_IN_PIXEL : y + config.NODULE_RADIUS_IN_PIXEL,
+			x - config.NODULE_RADIUS_IN_PIXEL : x + config.NODULE_RADIUS_IN_PIXEL]		
+		
+	return crop	
 
 
 #Gets the list of image descriptor specified in the config file in the same order
