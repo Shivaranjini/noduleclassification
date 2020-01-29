@@ -104,8 +104,8 @@ def image_processing(imagePath, x, y):
 		mask = np.zeros((height,width), np.uint8)
 		circle_img = cv2.circle(mask, (x, y),radius, (255,255,255), thickness=-1)
 		masked_data = cv2.bitwise_and(image, image, mask = circle_img)
-		crop = masked_data[y - config.NODULE_RADIUS_IN_PIXEL : y + config.NODULE_RADIUS_IN_PIXEL,
-		x - config.NODULE_RADIUS_IN_PIXEL : x + config.NODULE_RADIUS_IN_PIXEL]		
+		crop = masked_data[y - radius: y + radius,
+		x - radius : x + radius]		
 		return crop
 	return None	
 
