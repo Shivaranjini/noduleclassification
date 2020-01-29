@@ -34,6 +34,9 @@ dataFrame = pd.read_csv(config.RAW_IMAGE_PATH, sep=r'\s*,\s*',delimiter=';',
 #shuffle data frames
 dataFrame = shuffle(dataFrame)
 
+#A cropped image with the specified demension (using radius param)is created and connected
+#components are analized. If the connected is sufficiently large then the 
+#radius of minimum enclosing circle is returned.
 def process_in_parts(image, radius, x, y):
 	background = 0
 	width = 2 * radius + 1
@@ -80,14 +83,14 @@ def process_in_parts(image, radius, x, y):
 			return 0
 	return 0
 
-def image_processing(imagePath, x, y):
+def process_image(imagePath, x, y):
 	image = cv2.imread(path.sep.join([config.BASE_PATH, imagePath]))	
 	height, width, channel = image.shape	
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)	
 	blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 	mid = cv2.Canny(blurred, 30, 150)
 	eroded = cv2.erode(mid.copy(), None, iterations=2)
-	dilated = cv2.dilate(eroded.copy(), None, iterations=2)
+	dilated = cv2.dilate(eroded.copy(), None, iterations=3)
 	
 	k = 3
 	radius = 0
@@ -166,7 +169,7 @@ for (imagePath, x, y, z, label) in zip(imagePaths, x_coordinates, y_coordinates,
 	
 	x = int(x)
 	y = int(y)	
-	crop = image_processing(imagePath, x, y)	
+	crop = process_image(imagePath, x, y)	
 	crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
 	#cv2.imshow("min circle",crop)	
 	#cv2.waitKey(0)	
