@@ -89,8 +89,8 @@ def process_image(imagePath, x, y):
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)	
 	blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 	mid = cv2.Canny(blurred, 30, 150)
-	eroded = cv2.erode(mid.copy(), None, iterations=2)
-	dilated = cv2.dilate(eroded.copy(), None, iterations=3)
+	#eroded = cv2.erode(mid.copy(), None, iterations=1)
+	dilated = cv2.dilate(mid.copy(), None, iterations=2)
 	
 	# Nodule is analyzed at various window dimension with respect to the center
 	# Whenever the connected component at the given window 'k' is comparitively small
@@ -175,8 +175,8 @@ for (imagePath, x, y, z, label) in zip(imagePaths, x_coordinates, y_coordinates,
 	y = int(y)	
 	crop = process_image(imagePath, x, y)	
 	crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-	#cv2.imshow("min circle",crop)	
-	#cv2.waitKey(0)	
+	cv2.imshow("min circle",crop)	
+	cv2.waitKey(0)	
 	# describe the image using multiple image descriptors	
 	
 	for desc in featureDesc:
@@ -189,8 +189,3 @@ features = np.reshape(features, (imagePaths.shape[0], -1))
 dataset.add(features, ls)
 
 dataset.close()
-
-	
-	
-
-
