@@ -35,7 +35,7 @@ dataFrame = pd.read_csv(config.RAW_IMAGE_PATH, sep=r'\s*,\s*',delimiter=';',
 dataFrame = shuffle(dataFrame)
 
 #A cropped image with the specified demension (using radius param)is created and connected
-#components are analized. If the connected is sufficiently large then the 
+#components are analized. If the connected component is sufficiently large then the 
 #radius of minimum enclosing circle is returned.
 def process_in_parts(image, radius, x, y):
 	background = 0
@@ -92,6 +92,10 @@ def process_image(imagePath, x, y):
 	eroded = cv2.erode(mid.copy(), None, iterations=2)
 	dilated = cv2.dilate(eroded.copy(), None, iterations=3)
 	
+	# Nodule is analyzed at various window dimension with respect to the center
+	# Whenever the connected component at the given window 'k' is comparitively small
+	#with respect to the size of the window, then processing will be stopped and previous 
+	# min enclosing circle's radius is considered and region is segmented
 	k = 3
 	radius = 0
 	while (k < 15):
