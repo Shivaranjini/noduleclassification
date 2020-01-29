@@ -87,7 +87,7 @@ def image_processing(imagePath, x, y):
 	blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 	mid = cv2.Canny(blurred, 30, 150)
 	eroded = cv2.erode(mid.copy(), None, iterations=2)
-	dilated = cv2.dilate(mid.copy(), None, iterations=2)
+	dilated = cv2.dilate(eroded.copy(), None, iterations=2)
 	
 	k = 3
 	radius = 0
