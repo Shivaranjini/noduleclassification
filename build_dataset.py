@@ -103,7 +103,9 @@ def process_image(imagePath, x, y):
 		if(rad > radius):
 			radius = rad
 		else :
-			break
+			#if window dimension is sufficiently large, but failed to get large connected component then break from loop
+			if(k > 7):
+				break
 		k = k + 1	
 	
 	if(radius == 0):
